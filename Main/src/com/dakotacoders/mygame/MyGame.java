@@ -66,9 +66,14 @@ public class MyGame extends Game
 		{
 			player.isCrouching = true;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !player.isJumping() && !player.isFalling())
 		{
 			player.jump();
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+		{
+			dispose();
+			System.exit(0);
 		}
 	}
 
@@ -128,6 +133,7 @@ public class MyGame extends Game
 			entity.dispose();
 		}
 		batch.dispose();
+		super.dispose();
 	}
 
 	@Override
