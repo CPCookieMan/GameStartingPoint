@@ -20,6 +20,7 @@ public class Player extends Entity
 	@Override
 	public void frameLogic()
 	{
+		isFalling = dy < 0;
 		if (isCrouching)
 		{
 
@@ -37,7 +38,6 @@ public class Player extends Entity
 				dy += jumpSpeed;
 			}
 		}
-		isFalling = dy < 0;
 		super.frameLogic();
 	}
 
@@ -55,7 +55,6 @@ public class Player extends Entity
 			if (isCrouching)
 			{
 				isCrouching = false;
-				jumpSpeed = 5;
 			}
 			beforeJumpHeight = y;
 			gravityAffected = false;
