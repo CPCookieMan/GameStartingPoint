@@ -34,6 +34,14 @@ public class Player extends Entity
 				isFalling = true;
 				isJumping = false;
 			}
+			else if (y > (beforeJumpHeight + (jumpHeight * (2f / 3f))))
+			{
+				dy += jumpSpeed / 3;
+			}
+			else if (y > (beforeJumpHeight + (jumpHeight * (1f / 3f))))
+			{
+				dy += jumpSpeed / 2;
+			}
 			else
 			{
 				dy += jumpSpeed;
