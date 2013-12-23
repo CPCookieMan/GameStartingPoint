@@ -39,8 +39,7 @@ public class MyGame extends Game
 		// After this is where you will be initializing all of your game's objects, textures, sounds, etc.
 
 		Entity logo = new Entity(new Texture(Gdx.files.internal("logo.png")));
-		logo.x = width / 2 - logo.width / 2;
-		logo.y = height / 2 - logo.height / 2;
+		logo.centerOnScreen();
 		entities.add(logo);
 
 		player = new Player();

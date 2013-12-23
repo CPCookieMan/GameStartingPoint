@@ -34,6 +34,12 @@ public class Entity extends Rectangle
 		height = texture.getHeight();
 	}
 
+	public void centerOnScreen()
+	{
+		x = MyGame.width / 2 - width / 2;
+		y = MyGame.height / 2 - height / 2;
+	}
+
 	private void commonConstructor()
 	{
 		frameReset();
