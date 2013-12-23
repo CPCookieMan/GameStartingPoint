@@ -6,7 +6,7 @@ public class Player extends Entity
 {
 	public boolean isCrouching = false;
 	public float jumpHeight = 50;
-	public float jumpSpeed = 10;
+	public float jumpSpeed = 17;
 	public float speed = 10;
 	private boolean isFalling = false;
 	private boolean isJumping = false;
