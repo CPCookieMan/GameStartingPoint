@@ -14,8 +14,8 @@ public class MyGame extends Game
 {
 	public static float delta = 0.4f;
 	public static float timescale = 1.0f;
-	public int width = 800;
-	public int height = 480;
+	public static int width = 800;
+	public static int height = 480;
 
 	public long lastFrame;
 
@@ -39,8 +39,6 @@ public class MyGame extends Game
 		// After this is where you will be initializing all of your game's objects, textures, sounds, etc.
 
 		Entity logo = new Entity(new Texture(Gdx.files.internal("logo.png")));
-		logo.width = logo.texture.getWidth();
-		logo.height = logo.texture.getHeight();
 		logo.x = width / 2 - logo.width / 2;
 		logo.y = height / 2 - logo.height / 2;
 		entities.add(logo);

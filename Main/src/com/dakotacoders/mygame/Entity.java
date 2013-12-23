@@ -19,12 +19,19 @@ public class Entity extends Rectangle
 	{
 		texture = t;
 		commonConstructor();
+		sizeToTexture();
 	}
 
 	public Entity()
 	{
 		texture = new Texture(Gdx.files.internal("white.png"));
 		commonConstructor();
+	}
+
+	public void sizeToTexture()
+	{
+		width = texture.getWidth();
+		height = texture.getHeight();
 	}
 
 	private void commonConstructor()
