@@ -15,6 +15,7 @@ public class Entity extends Rectangle
 	public Texture texture;
 	public boolean flipped = false;
 	public boolean flippable = false;
+	public boolean draw = true;
 	// public final boolean isControlled = false; **Removed until we need it.
 
 	public Entity(Texture t)
@@ -53,7 +54,10 @@ public class Entity extends Rectangle
 
 	public void draw(SpriteBatch batch)
 	{
-		batch.draw(texture, x, y, width, height);
+		if (draw)
+		{
+			batch.draw(texture, x, y, width, height);
+		}
 	}
 
 	public void dispose()
