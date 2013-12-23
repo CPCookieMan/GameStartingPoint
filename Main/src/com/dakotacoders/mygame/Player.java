@@ -2,7 +2,7 @@ package com.dakotacoders.mygame;
 
 public class Player extends Entity
 {
-	public final boolean isControlled = true;
+	//public final boolean isControlled = true; **Removed until we need it.
 	public boolean isCrouching = false;
 	public float jumpHeight = 50;
 	public float jumpSpeed = 10;
@@ -21,10 +21,10 @@ public class Player extends Entity
 	public void frameLogic()
 	{
 		isFalling = dy < 0;
-		if (isCrouching)
-		{
-
-		}
+		//if (isCrouching)
+		//{
+		// TODO: Implement something to show that the character is crouching.
+		//}
 		if (isJumping && !isFalling)
 		{
 			if (y > beforeJumpHeight + jumpHeight)
@@ -33,7 +33,7 @@ public class Player extends Entity
 				isFalling = true;
 				isJumping = false;
 			}
-			else if (!isFalling)
+			else
 			{
 				dy += jumpSpeed;
 			}

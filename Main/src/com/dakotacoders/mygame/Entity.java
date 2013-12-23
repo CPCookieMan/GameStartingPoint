@@ -12,8 +12,8 @@ public class Entity extends Rectangle
 	public float dy;
 	public boolean gravityAffected = true;
 	public float gravitySpeed = 4;
-	public final boolean isControlled = false;
 	public Texture texture;
+	// public final boolean isControlled = false; **Removed until we need it.
 
 	public Entity(Texture t)
 	{
