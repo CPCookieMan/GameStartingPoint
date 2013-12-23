@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class MyGame extends Game
 {
-	public static float delta = 1;
+	public static float delta = 0.2f;
 	public int width = 800;
 	public int height = 480;
 
@@ -137,7 +137,8 @@ public class MyGame extends Game
 		// I've set it up so that generally you don't need to touch it.
 		// It manages the controls, logic, and draw methods for you.
 
-		delta = Gdx.graphics.getDeltaTime();
+		// Removed the delta because it was causing problems. Will have to add back later.
+		//delta = Gdx.graphics.getDeltaTime();
 
 		controls();
 		logic();
