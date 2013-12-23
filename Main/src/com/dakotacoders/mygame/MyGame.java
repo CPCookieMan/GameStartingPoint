@@ -12,9 +12,12 @@ import java.util.ArrayList;
 
 public class MyGame extends Game
 {
-	public static float delta = 0.2f;
+	public static float delta = 0.4f;
+	public static float timescale = 1.0f;
 	public int width = 800;
 	public int height = 480;
+
+	public long lastFrame;
 
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
@@ -25,6 +28,8 @@ public class MyGame extends Game
 	@Override
 	public void create()
 	{
+		lastFrame = System.nanoTime();
+
 		// This method gets called when the game is started.
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, width, height);
@@ -143,8 +148,10 @@ public class MyGame extends Game
 		// I've set it up so that generally you don't need to touch it.
 		// It manages the controls, logic, and draw methods for you.
 
-		// Removed the delta because it was causing problems. Will have to add back later.
+		// Removed the built in delta because it was causing problems. Made a new system from scratch that should work.
 		//delta = Gdx.graphics.getDeltaTime();
+		delta = (float) ((System.nanoTime() - lastFrame) / (timescale * 2.35 * 20000000));
+		lastFrame = System.nanoTime();
 
 		controls();
 		logic();
