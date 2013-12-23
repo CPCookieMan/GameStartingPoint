@@ -13,6 +13,7 @@ public class Entity extends Rectangle
 	public boolean gravityAffected = true;
 	public float gravitySpeed = 4;
 	public Texture texture;
+	public boolean flipped = false;
 	// public final boolean isControlled = false; **Removed until we need it.
 
 	public Entity(Texture t)
@@ -40,7 +41,7 @@ public class Entity extends Rectangle
 		y = MyGame.height / 2 - height / 2;
 	}
 
-	private void commonConstructor()
+	protected void commonConstructor()
 	{
 		frameReset();
 		x = 80;
@@ -69,5 +70,23 @@ public class Entity extends Rectangle
 	{
 		x += (dx * MyGame.delta);
 		y += (dy * MyGame.delta);
+		if (dx > 0.0001)
+		{
+			if (flipped)
+			{
+				x += width;
+				width *= -1;
+				flipped = false;
+			}
+		}
+		else if (dx < -0.0001)
+		{
+			if (!flipped)
+			{
+				x += width;
+				width *= -1;
+				flipped = true;
+			}
+		}
 	}
 }

@@ -42,7 +42,7 @@ public class MyGame extends Game
 		logo.centerOnScreen();
 		entities.add(logo);
 
-		player = new Player();
+		player = new Player(new Texture(Gdx.files.internal("man.png")));
 		entities.add(player);
 	}
 

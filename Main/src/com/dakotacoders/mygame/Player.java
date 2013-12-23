@@ -1,5 +1,7 @@
 package com.dakotacoders.mygame;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class Player extends Entity
 {
 	//public final boolean isControlled = true; **Removed until we need it.
@@ -63,5 +65,12 @@ public class Player extends Entity
 			return true;
 		}
 		return false;
+	}
+
+	public Player(Texture t)
+	{
+		texture = t;
+		commonConstructor();
+		sizeToTexture();
 	}
 }
