@@ -14,6 +14,7 @@ public class Entity extends Rectangle
 	public float gravitySpeed = 4;
 	public Texture texture;
 	public boolean flipped = false;
+	public boolean flippable = false;
 	// public final boolean isControlled = false; **Removed until we need it.
 
 	public Entity(Texture t)
@@ -70,22 +71,25 @@ public class Entity extends Rectangle
 	{
 		x += (dx * MyGame.delta);
 		y += (dy * MyGame.delta);
-		if (dx > 0.0001)
+		if (flippable)
 		{
-			if (flipped)
+			if (dx > 0.0001)
 			{
-				x += width;
-				width *= -1;
-				flipped = false;
+				if (flipped)
+				{
+					x += width;
+					width *= -1;
+					flipped = false;
+				}
 			}
-		}
-		else if (dx < -0.0001)
-		{
-			if (!flipped)
+			else if (dx < -0.0001)
 			{
-				x += width;
-				width *= -1;
-				flipped = true;
+				if (!flipped)
+				{
+					x += width;
+					width *= -1;
+					flipped = true;
+				}
 			}
 		}
 	}

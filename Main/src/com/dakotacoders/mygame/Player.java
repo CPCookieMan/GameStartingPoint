@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Entity
 {
-	//public final boolean isControlled = true; **Removed until we need it.
 	public boolean isCrouching = false;
 	public float jumpHeight = 50;
 	public float jumpSpeed = 10;
@@ -70,6 +69,7 @@ public class Player extends Entity
 	public Player(Texture t)
 	{
 		texture = t;
+		flippable = true;
 		commonConstructor();
 		sizeToTexture();
 	}
