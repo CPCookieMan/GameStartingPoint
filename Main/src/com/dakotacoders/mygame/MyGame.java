@@ -2,21 +2,25 @@ package com.dakotacoders.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+
+import java.util.ArrayList;
 
 public class MyGame extends Game
 {
+	public static float delta = 1;
 	public int width = 800;
 	public int height = 480;
 
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
-	public Texture logoImage;
-	public Rectangle logo;
+	public Player player;
+
+	public ArrayList<Entity> entities = new ArrayList<Entity>();
 
 	@Override
 	public void create()
@@ -29,30 +33,75 @@ public class MyGame extends Game
 
 		// After this is where you will be initializing all of your game's objects, textures, sounds, etc.
 
-		logoImage = new Texture(Gdx.files.internal("logo.png"));
-
-		logo = new Rectangle();
-		logo.width = logoImage.getWidth();
-		logo.height = logoImage.getHeight();
+		Entity logo = new Entity(new Texture(Gdx.files.internal("logo.png")));
+		logo.width = logo.texture.getWidth();
+		logo.height = logo.texture.getHeight();
 		logo.x = width / 2 - logo.width / 2;
 		logo.y = height / 2 - logo.height / 2;
+		entities.add(logo);
+
+		player = new Player();
+		entities.add(player);
 	}
 
 	public void controls()
 	{
 		// Your controller code should go here.
+		player.dx = 0;
+		player.dy = 0;
+		player.isCrouching = false;
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
+		{
+			player.dx = -player.speed;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.D))
+		{
+			player.dx = player.speed;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.A) && Gdx.input.isKeyPressed(Input.Keys.D))
+		{
+			player.dx = 0;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.S) && !player.isJumping())
+		{
+			player.isCrouching = true;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		{
+			player.jump();
+		}
 	}
 
 	public void logic()
 	{
 		// Your logic code should go here.
+		for (Entity entity : entities.toArray(new Entity[entities.size()]))
+		{
+			entity.frameReset();
+			if (entity.gravityAffected)
+			{
+				gravity(entity);
+			}
+			entity.frameLogic();
+		}
 	}
 
 	public void draw()
 	{
 		// Your rendering code should go here.
 		// Want help? Try here: https://github.com/libgdx/libgdx/wiki/A-simple-game
-		batch.draw(logoImage, logo.x, logo.y, logo.width, logo.height);
+		for (Entity entity : entities.toArray(new Entity[entities.size()]))
+		{
+			entity.draw(batch);
+		}
+	}
+
+	public void gravity(Entity entity)
+	{
+		if (entity.y > 0)
+		{
+			entity.dy = -entity.gravitySpeed;
+		}
 	}
 
 	@Override
@@ -74,7 +123,10 @@ public class MyGame extends Game
 	public void dispose()
 	{
 		// Clean up after ourselves when the game exits. Dirty, dirty objects!
-		logoImage.dispose();
+		for (Entity entity : entities.toArray(new Entity[entities.size()]))
+		{
+			entity.dispose();
+		}
 		batch.dispose();
 	}
 
@@ -84,6 +136,8 @@ public class MyGame extends Game
 		// This method is called once every time the screen refreshes.
 		// I've set it up so that generally you don't need to touch it.
 		// It manages the controls, logic, and draw methods for you.
+
+		delta = Gdx.graphics.getDeltaTime();
 
 		controls();
 		logic();
