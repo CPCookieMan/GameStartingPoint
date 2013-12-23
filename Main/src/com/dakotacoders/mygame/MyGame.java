@@ -40,6 +40,7 @@ public class MyGame extends Game
 
 		Entity logo = new Entity(new Texture(Gdx.files.internal("logo.png")));
 		logo.centerOnScreen();
+		logo.draw = false;
 		entities.add(logo);
 
 		player = new Player(new Texture(Gdx.files.internal("man.png")));
